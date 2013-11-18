@@ -27,9 +27,9 @@ import com.siteview.om.util.ToolsUtil;
 public class ShowAllIncident extends ViewPart {
 	public List<IncidentModle> incidents;
 	public static Map<IncidentModle,ShowIncidentEditInput> map=new HashMap<IncidentModle,ShowIncidentEditInput>();
-	Tree tree;
-	Image icon_new=new Image(null, ToolsUtil.getRealPath("icons/ok.png"));
-	Image icon=new Image(null, ToolsUtil.getRealPath("icons/error.png"));
+	public static Tree tree;
+	public static Image icon_new=new Image(null, ToolsUtil.getRealPath("icons/ok.png"));
+	public static Image icon=new Image(null, ToolsUtil.getRealPath("icons/error.png"));
 	public ShowAllIncident() {
 	}
 

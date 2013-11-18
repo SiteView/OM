@@ -1,5 +1,7 @@
 package com.siteview.om.commands;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +24,15 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 import com.siteview.om.Activator;
+import com.siteview.om.IncidentModle;
 import com.siteview.om.OMAPIiml;
 
 public class NewIncidentEdit extends EditorPart {
@@ -366,16 +371,38 @@ public class NewIncidentEdit extends EditorPart {
 				str.append("Resolution="+rus+";");
 				str.append("SelfFeedback="+feedba+";");
 				String message=OMAPIiml.savaOm(str.toString());
+				IncidentModle in=new IncidentModle();
+				in.setCaseEndTime(endtimename);
+				in.setCaseStartTime(starttimename);
+				in.setCategory(productname);
+				in.setCostTime(userdtimename);
+				in.setOwner(username);
+				in.setPwd(passwordname);
+				in.setResolution(rus);
+				in.setSelfFeedback(feedba);
+				in.setSubCategory(functionname);
+				in.setSubject(desname);
+				in.setTypeOfIncident(typename);
+				in.setUser(username);
+				Date date=new Date();
+				SimpleDateFormat simp=new SimpleDateFormat("yyyy-MM-dd");
 				if(message.startsWith("Failure")){
 					MessageDialog.openConfirm(new Shell(), "保存任务","保存任务失败:"+message);
 					return;
 				}else if(message.startsWith("Success")){
+					TreeItem tree=new TreeItem(ShowAllIncident.tree, SWT.NONE);
+					String ss=simp.format(date);
+					tree.setText(ss+" : "+desname);
+					tree.setImage(ShowAllIncident.icon);
+					in.setRecId(message.substring(message.indexOf(":")+1));
+					tree.setData(in);
 					if(MessageDialog.openQuestion(new Shell(), "保存任务","保存任务成功，是否继续新建任务?")){
 						description.setText("");
 						results.setText("");
 						feedback.setText("");
 					}else{
-						System.exit(0);
+						IWorkbenchPage page = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage();
+						page.closeEditor(page.findEditor(NewIncident.newinc), false);
 					}
 				}
 				

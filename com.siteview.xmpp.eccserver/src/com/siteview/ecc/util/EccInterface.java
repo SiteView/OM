@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.siteview.ecc.modle.AlarmRule;
+import com.siteview.ecc.modle.EccAlarm;
 import com.siteview.ecc.modle.GroupModle;
 import com.siteview.ecc.modle.MachineModle;
 import com.siteview.ecc.modle.MonitorLogModle;
@@ -214,5 +216,32 @@ public class EccInterface {
 			permissions.add(bo.GetField("PermissionsId").get_NativeValue().toString());
 		}
 		return permissions;
+	}
+	/**
+	 * @param userid  ÓÃ»§id
+	 * @return ·µ»ØEccAlarm
+	 * @throws SiteviewException
+	 */
+	public static EccAlarm getAlarmRule(String userid) throws SiteviewException{
+		EccAlarm eccalarm=new EccAlarm();
+		List<AlarmRule> alarms=new ArrayList<AlarmRule>();
+		boolean flag=true;
+		if(!UserInfor.superuser.contains(userid)){
+			flag=false;
+		}
+		Collection<BusinessObject> col=EccApiUtil.getBussCollection(StaticPam.ecc_table_EccAlarmRule);
+		Iterator<BusinessObject>   ite=col.iterator();
+		while(ite.hasNext()){
+			BusinessObject bo=ite.next();
+			AlarmRule alarm=new AlarmRule();
+			alarm.setAlarmEvent(bo.GetField(StaticPam.ecc_table_EccAlarmRul_AlarmEvent).get_NativeValue().toString());
+			alarm.setAlarmName(bo.GetField(StaticPam.ecc_table_EccAlarmRul_AlarmName).get_NativeValue().toString());
+			alarm.setAlarmType(bo.GetField(StaticPam.ecc_table_EccAlarmRul_AlarmType).get_NativeValue().toString());
+			alarm.setRuleStatus(bo.GetField(StaticPam.ecc_table_EccAlarmRul_RuleStatus).get_NativeValue().toString());
+			alarm.setRecid(bo.get_RecId());
+			alarms.add(alarm);
+		}
+		eccalarm.setAlarmRule(alarms);
+		return eccalarm;
 	}
 }

@@ -65,4 +65,21 @@ public class StaticPam {
 	public static String ecc_table_monitorlog_createdata="CreatedDateTime";//创建
 	public static String ecc_table_monitorlog_groupid="ownerID";//
 	
+	public static String ecc_table_EccAlarmRule="EccAlarmRule";
+	public static String ecc_table_EccAlarmRul_AlarmName="AlarmName";//报警名称
+	public static String ecc_table_EccAlarmRul_AlarmType="AlarmType";//报警类别
+	public static String ecc_table_EccAlarmRul_AlarmEvent="AlarmEvent";//报警事件
+	public static String ecc_table_EccAlarmRul_AlarmTactful="AlarmTactful";//报警策略
+	public static String ecc_table_EccAlarmRul_RepeatCount="RepeatCoun";//重复次数
+	public static String ecc_table_EccAlarmRul_StartCount="StartCount";//其实次数
+	public static String ecc_table_EccAlarmRul_RuleStatus="RuleStatus";//规则状态
+	public static String ecc_table_EccAlarmRul_Address="Address";//报警地址
+	public static String ecc_table_EccAlarmRul_Other="Othe";//其他地址
+	public static String ecc_table_EccAlarmRul_PromotionCount="PromotionCount";//升级次数
+	public static String ecc_table_EccAlarmRul_PromotionAddress="PromotionAddress";//升级地址
+	public static String ecc_table_EccAlarmRul_StopCount="StopCount";//停止次数
+	public static String ecc_table_EccAlarmRul_DutyId="DutyId";//值班列表
+	public static String ecc_table_EccAlarmRul_Service="Service";//报警模板
+	public static String AlarmRule_resh="EccAlarmRuleContainsEccSubId";
+	
 }

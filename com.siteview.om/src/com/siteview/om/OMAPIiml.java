@@ -20,7 +20,7 @@ import org.osgi.framework.ServiceException;
  *
  */
 public class OMAPIiml{
-	public static String url="http://127.0.0.1:1111/webservice/MyOm";//incident
+	public static String url="http://om.siteview.com/itsm/webservice/MyOm";//incident
 	@SuppressWarnings("unchecked")
 	public static Map<String, List<String>> getProduct() throws ServiceException{
 		Map<String,List<String>> map=new HashMap<String,List<String>>();
@@ -53,9 +53,9 @@ public class OMAPIiml{
 			Call call=(Call)service.createCall(); 
 			call.setTargetEndpointAddress(new java.net.URL(url));
 			call.setOperationName("CreateOm");
-//			call.setOption("tablename", "incident");
 			call.addParameter(new QName("om"), XMLType.XSD_STRING, ParameterMode.IN);
 			call.addParameter(new QName("tablename"), XMLType.XSD_STRING, ParameterMode.IN);
+			call.setReturnClass(String.class);
 			String s= (String) call.invoke(new Object[]{om,"incident"});
 			return s;
 		} catch (Exception e) {
@@ -127,6 +127,7 @@ public class OMAPIiml{
 			call.addParameter(new QName("recid"), XMLType.XSD_STRING, ParameterMode.IN);
 			call.addParameter(new QName("feedback"), XMLType.XSD_STRING, ParameterMode.IN);
 			QName qn = new QName(url,"feedback");
+			call.setReturnQName(qn);
 			s=(String) call.invoke(new Object[]{recid,feedback});
 		} catch (Exception e) {
 			e.printStackTrace();

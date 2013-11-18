@@ -283,7 +283,7 @@ public class ShowIncidentEdit extends EditorPart {
 		fd_text_3.right = new FormAttachment(100, -5);
 		fd_text_3.bottom = new FormAttachment(comm, 80);
 		comm.setLayoutData(fd_text_3);
-		comm.setText(inc.getCommentAndFeedback());
+		comm.setText(inc.getCommentAndFeedback()==null?"":inc.getCommentAndFeedback());
 		
 		Label label_10 = new Label(parent, SWT.NONE);
 		FormData fd_label_10 = new FormData();
@@ -315,6 +315,7 @@ public class ShowIncidentEdit extends EditorPart {
 				String feedba=feedback.getText().trim();
 				String message="";
 				if(!feedba.equalsIgnoreCase(inc.getSelfFeedback().trim())){
+					inc.setSelfFeedback(feedba);
 					message=OMAPIiml.savafeedback(inc.getRecId(), feedba);
 				}
 				MessageDialog.openConfirm(null, "提交任务", message);
