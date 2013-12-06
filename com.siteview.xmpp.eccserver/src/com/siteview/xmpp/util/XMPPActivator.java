@@ -1,8 +1,5 @@
 package com.siteview.xmpp.util;
 
-import java.util.Date;
-
-import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.SSLXMPPConnection;
@@ -15,14 +12,12 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
 
-import Siteview.Convert;
-
 public class XMPPActivator extends Thread{
 	static String id = "xmpp.siteview.com";
 	static int port = 5223;
 //	static String userName = "redirector";
-	public static String userName = "test2";
-	static String userPwd = "zhonglihua";
+	public static String userName = "eccdemo";
+	static String userPwd = "siteview";
 	public static XMPPConnection connection;
 	public static PacketFilter messagefilter;
 	public static PacketListener messageListener;
@@ -59,7 +54,7 @@ public class XMPPActivator extends Thread{
 			public void connectionClosedOnError(Exception arg0) {
 				final XMPPActivator xmppa=new XMPPActivator();
 				try {
-					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
+//					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
 					xmppa.init();
 				} catch (XMPPException e) {
 					e.printStackTrace();
@@ -111,4 +106,7 @@ public class XMPPActivator extends Thread{
 //			e.printStackTrace();
 //		}
 //	 }
+	public static void getAccess(){
+		
+	}
 }

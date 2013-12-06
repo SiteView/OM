@@ -59,7 +59,7 @@ public class XMPPActivator extends Thread{
 			public void connectionClosedOnError(Exception arg0) {
 				final XMPPActivator xmppa=new XMPPActivator();
 				try {
-					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
+//					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
 					xmppa.init();
 				} catch (XMPPException e) {
 					e.printStackTrace();
@@ -71,7 +71,6 @@ public class XMPPActivator extends Thread{
 				final XMPPActivator xmppa=new XMPPActivator();
 				try {
 					xmppa.init();
-//					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
 				} catch (XMPPException e) {
 					e.printStackTrace();
 				}

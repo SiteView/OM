@@ -16,7 +16,7 @@ public class FileTool {
 	public static String getRoot(){
 		 String path=null;
 		  try {
-		    path = FileLocator.toFileURL(Platform.getBundle("com.siteview.xmpp.om").getEntry("")).getPath();
+		    path = FileLocator.toFileURL(Platform.getBundle("com.siteview.xmpp.eccserver").getEntry("")).getPath();
 		    path = path.substring(path.indexOf("/") + 1, path.length());
 		  } catch (Exception e) {
 		    e.printStackTrace();

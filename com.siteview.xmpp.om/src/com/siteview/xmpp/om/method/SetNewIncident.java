@@ -12,7 +12,7 @@ public class SetNewIncident extends OmServer{
 	
 	public String update(String from,String body) throws SiteviewException{
 		JSONObject ob=JSONObject.fromObject(body);
-		Incident incident=(Incident) JSONObject.toBean(ob);
+		Incident incident=(Incident) JSONObject.toBean(ob, Incident.class);
 		if(OmApi.setNewIncident(incident)){
 			return _key_+StaticPam._good;
 		}

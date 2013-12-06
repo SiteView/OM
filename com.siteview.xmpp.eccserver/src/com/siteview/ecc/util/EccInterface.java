@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.siteview.ecc.modle.AlarmLog;
 import com.siteview.ecc.modle.AlarmRule;
 import com.siteview.ecc.modle.EccAlarm;
 import com.siteview.ecc.modle.GroupModle;
@@ -222,8 +223,7 @@ public class EccInterface {
 	 * @return 返回EccAlarm
 	 * @throws SiteviewException
 	 */
-	public static EccAlarm getAlarmRule(String userid) throws SiteviewException{
-		EccAlarm eccalarm=new EccAlarm();
+	public static List<AlarmRule> getAlarmRule(String userid) throws SiteviewException{
 		List<AlarmRule> alarms=new ArrayList<AlarmRule>();
 		boolean flag=true;
 		if(!UserInfor.superuser.contains(userid)){
@@ -241,7 +241,34 @@ public class EccInterface {
 			alarm.setRecid(bo.get_RecId());
 			alarms.add(alarm);
 		}
-		eccalarm.setAlarmRule(alarms);
-		return eccalarm;
+		return alarms;
+	}
+	
+	/**
+	 * @param userid  用户id
+	 * @return 返回EccAlarm
+	 * @throws SiteviewException
+	 */
+	public static List<AlarmLog> getAlarmLog(String userid,String alarmlog) throws SiteviewException{
+		List<AlarmLog> alarms=new ArrayList<AlarmLog>();
+		boolean flag=true;
+		if(!UserInfor.superuser.contains(userid)){
+			flag=false;
+		}
+		Collection<BusinessObject> col=EccApiUtil.getBussCollection(StaticPam.ecc_table_EccAlarmRule);
+		Iterator<BusinessObject>   ite=col.iterator();
+		while(ite.hasNext()){
+			BusinessObject bo=ite.next();
+			AlarmLog alarm=new AlarmLog();
+			alarm.setAlarmname(bo.GetField(StaticPam.ecc_table_EccAlarmRul_AlarmName).get_NativeValue().toString());
+			alarm.setAlarmtype(bo.GetField(StaticPam.ecc_table_EccAlarmRul_AlarmType).get_NativeValue().toString());
+			alarm.setAlarmstatus(bo.GetField(StaticPam.ecc_table_EccAlarmRul_RuleStatus).get_NativeValue().toString());
+			alarm.setAddress("");
+			alarm.setAlarmtime("");
+			alarm.setMonitorid("");
+			alarm.setMonitortitle("");
+			alarms.add(alarm);
+		}
+		return alarms;
 	}
 }

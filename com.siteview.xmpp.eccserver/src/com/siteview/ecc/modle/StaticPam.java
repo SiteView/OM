@@ -30,6 +30,7 @@ public class StaticPam {
 	public static String monitorstatus="monitorstatus";//xmpp_监测器状态
 	public static String monitortitle="monitortitle";//xmpp_监测器标题
 	
+	public static String alarmruleid="alarmruleid";//xmpp_报警规则id
 	
 	public static String bo_id="RecId";//业务对象id
 	public static String ecc_table_Per="Permissions";//权限表格
@@ -82,4 +83,12 @@ public class StaticPam {
 	public static String ecc_table_EccAlarmRul_Service="Service";//报警模板
 	public static String AlarmRule_resh="EccAlarmRuleContainsEccSubId";
 	
+	public static String ecc_table_EccAlarmLog="EccAlarmLog";
+	public static String ecc_table_EccAlarmLog_AlarmName="AlarmName";//报警名称
+	public static String ecc_table_EccAlarmLog_AlarmType="AlarmType";//报警类别
+	public static String ecc_table_EccAlarmLog_AlarmGroup="AlarmGroup";//报警组
+	public static String ecc_table_EccAlarmLog_AlarmMonitor="AlarmMonitor";//报警监测器
+	public static String ecc_table_EccAlarmLog_AlarmReceAdd="ReceiverAddress";//报警地址
+	public static String ecc_table_EccAlarmLog_AlarmStatus="AlarmStatus";//报警状态
+	public static String ecc_table_EccAlarmLog_AlarmContent="AlarmContent";//报警类容
 }

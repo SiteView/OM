@@ -120,12 +120,13 @@ public class OmApi {
 	//		bo.GetField("CommentAndFeedback").SetValue(new SiteviewValue(in));
 			bo.GetField("CostTime").SetValue(new SiteviewValue(inc.getCostTime()));
 			bo.GetField("Owner").SetValue(new SiteviewValue(inc.getOwner()));
-			bo.GetField("Resolution").SetValue(new SiteviewValue(inc.getResolution()));
 			bo.GetField("SelfFeedback").SetValue(new SiteviewValue(inc.getSelfFeedback()));
-	//		bo.GetField("IsCommentUpdata").SetValue(new SiteviewValue(inc.i));
 			bo.GetField("SubCategory").SetValue(new SiteviewValue(inc.getSubCategory()));
-			bo.GetField("Subject").SetValue(new SiteviewValue(inc.getSubject()));
 			bo.GetField("TypeOfIncident").SetValue(new SiteviewValue(inc.getTypeOfIncident()));
+			bo.GetField("Resolution").SetValue(new SiteviewValue(inc.getResolution()));
+			bo.SaveObject(OmApiUtil.getApi(), true, false);
+			bo.GetField("Subject").SetValue(new SiteviewValue(inc.getSubject()+"."));
+			bo.GetField("Status").SetValue(new SiteviewValue("ÒÑ¹Ø±Õ"));//
 			return bo.SaveObject(OmApiUtil.getApi(), true, false).get_SaveSuccess();
 		}catch (Exception e) {
 		}

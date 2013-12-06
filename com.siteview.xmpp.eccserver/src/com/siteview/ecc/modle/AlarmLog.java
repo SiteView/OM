@@ -2,13 +2,13 @@ package com.siteview.ecc.modle;
 
 public class AlarmLog {
 	private String alarmruleid;
-	private String monitorid;
-	private String alarmname;
-	private String alarmtime;
-	private String monitortitle;
-	private String alarmtype;
-	private String address;
-	private String alarmstatus;
+	private String monitorid;//报警监测器id
+	private String alarmname;//报警名称
+	private String alarmtime;//报警时间
+	private String monitortitle;//报警监测器标题
+	private String alarmtype;//报警类型
+	private String address;//发送地址
+	private String alarmstatus;//报警状态
 	public String getAlarmruleid() {
 		return alarmruleid;
 	}

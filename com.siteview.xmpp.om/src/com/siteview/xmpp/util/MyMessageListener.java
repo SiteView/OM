@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -14,6 +15,8 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
 import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
+
+import Siteview.Convert;
 
 import com.siteview.xmpp.om.method.OmServer;
 
@@ -33,7 +36,8 @@ public class MyMessageListener implements PacketListener{
 				try{
 					String packetId=message.getPacketID();
 					String s=message.getBody();
-					System.out.println("from:--"+message.getPacketID()+"---"+message.getBody());
+//					System.out.println("from:--"+message.getPacketID()+"---"+message.getBody());
+					FileTool.setlogfile("File/logfile",  Convert.ToDateString(new Date())+":"+message.getBody());
 					if(s==null)return;
 					m.setFrom(form);
 					m.setPacketID(packetId);
@@ -48,7 +52,7 @@ public class MyMessageListener implements PacketListener{
 						String body=class1.update(message.getFrom(),s.substring(s.indexOf(":")+1));
 						m.setBody(body);
 					connection.sendPacket(m);
-					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
+//					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
 					}
 				}catch (Exception e) {
 //					m.setBody(EccServer.error_unknowerror);
