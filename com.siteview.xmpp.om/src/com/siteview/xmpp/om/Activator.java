@@ -22,10 +22,11 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		StaticPam.users=OmApiUtil.getUser();
+		StaticPam.selectcom=OmApi.getProduct();
 		java.lang.Thread xmpp = new XMPPActivator();
 	    xmpp.start();
-	    StaticPam.users=OmApiUtil.getUser();
-	    StaticPam.selectcom=OmApi.getProduct();
+	 
 	}
 
 	/*

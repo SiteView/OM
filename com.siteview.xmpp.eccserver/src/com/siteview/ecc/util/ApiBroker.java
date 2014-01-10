@@ -11,7 +11,7 @@ import java.io.PrintStream;
 public class ApiBroker
 {
   private static ISiteviewApi api;
-  private static String connName = "{Common}Ecc_Master";
+  private static String connName = "{Common}om";
   private static String userName = "admin";
   private static String password = "manage";
 
@@ -20,7 +20,7 @@ public class ApiBroker
 	  try{
 		  if(api==null){
 		  ISiteviewApi siteview = SiteviewApi.get_CreateInstance();
-		  	siteview.Connect("Ecc_Master");
+		  	siteview.Connect("om");
 			IAuthenticationBundle authentication = siteview.GetAuthenticationBundle();
 			authentication.set_UserType("User");
 			authentication.set_AuthenticationId("admin");

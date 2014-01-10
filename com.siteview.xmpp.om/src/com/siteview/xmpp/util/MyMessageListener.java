@@ -30,8 +30,8 @@ public class MyMessageListener implements PacketListener{
 	
 	public void processPacket(Packet arg0) {
 		final Message message=(Message) arg0;
-		new Thread() {
-			public void run() {
+//		new Thread() {
+//			public void run() {
 				Message m=new Message();
 				try{
 					String packetId=message.getPacketID();
@@ -51,16 +51,17 @@ public class MyMessageListener implements PacketListener{
 						OmServer class1=(OmServer) Class.forName(value).newInstance();
 						String body=class1.update(message.getFrom(),s.substring(s.indexOf(":")+1));
 						m.setBody(body);
-					connection.sendPacket(m);
-//					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
+//					connection.sendPacket(m);
+					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
 					}
+					connection.sendPacket(m);
 				}catch (Exception e) {
 //					m.setBody(EccServer.error_unknowerror);
-					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
+//					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
 					connection.sendPacket(m);
 				}
-			}
-		}.start();
+//			}
+//		}.start();
 	}
 	
 	public static String getReturnStr(String filePath, String parm) {

@@ -27,14 +27,16 @@ public class EccInterface {
 	 * @return 所有有权限的组名+id集合 
 	 * @throws SiteviewException 
 	 */
-	public static List<String> status=new ArrayList<String>();
-	static{
-		status.add("error");
-		status.add("warning");
-		status.add("nodata");
-		status.add("disable");
-		status.add("good");
-	}
+//	public static List<String> status=new ArrayList<String>();
+	public static Map<String,List<String>> machinemap=new HashMap<String,List<String>>();
+//	public static Map<String,String> map=new HashMap<String,String>();
+//	static{
+//		status.add("error");
+//		status.add("warning");
+//		status.add("nodata");
+//		status.add("disable");
+//		status.add("good");
+//	}
 	
 	public static List<GroupModle> getGroup(String userid,String parentid) throws SiteviewException{
 		List<GroupModle> groups=new ArrayList<GroupModle>();
@@ -59,6 +61,17 @@ public class EccInterface {
 			group.setGroupdes(bo.GetField(StaticPam.ecc_table_group_groupdes).get_NativeValue().toString());
 			group.setGroupname(bo.GetField(StaticPam.ecc_table_group_groupname).get_NativeValue().toString());
 			group.setGroupparent("");
+			Map<String,String> map=new HashMap<String,String>();
+			map.put("MonitorType", "group");
+			map.put(StaticPam.ecc_table_eccdyn_monitorid, "group_"+id);
+			Collection<BusinessObject> icos=EccApiUtil.getBussCollection(map, StaticPam.ecc_table_eccdyn);
+			Iterator<BusinessObject> ites=icos.iterator();
+			if(ites.hasNext()){
+				BusinessObject bos=ites.next();
+				group.setStatus(bos.GetField(StaticPam.ecc_table_eccdyn_category).get_NativeValue().toString());
+			}else{
+				group.setStatus("good");
+			}
 			
 			Collection<BusinessObject> bodny=EccApiUtil.getBussCollection(StaticPam.ecc_table_eccdyn_groupid, id, StaticPam.ecc_table_eccdyn);
 			Iterator<BusinessObject> itedyn=bodny.iterator();
@@ -66,9 +79,9 @@ public class EccInterface {
 			while(itedyn.hasNext()){
 				BusinessObject dyn=itedyn.next();
 				String category=dyn.GetField(StaticPam.ecc_table_eccdyn_category).get_NativeValue().toString();
-				categorys[status.indexOf(category)]++;
+//				categorys[status.indexOf(category)]++;
 			}
-			group.setStatus(status.get(getstatus(categorys)));
+//			group.setStatus(status.get(getstatus(categorys)));
 			groups.add(group);
 		}
 		return groups;
@@ -102,14 +115,14 @@ public class EccInterface {
 			parm=StaticPam.ecc_table_monitor_machine;
 		}
 
-		Map<String,String> map=new HashMap<String,String>();
+		Map<String,BusinessObject> map=new HashMap<String,BusinessObject>();
 		Collection coldyn=EccApiUtil.getBussCollection(StaticPam.ecc_table_eccdyn);
 		Iterator   itedyn=coldyn.iterator();
 		while(itedyn.hasNext()){
 			BusinessObject dyn=(BusinessObject) itedyn.next();
 			String category=dyn.GetField(StaticPam.ecc_table_eccdyn_category).get_NativeValue().toString();
 			String monitorid=dyn.GetField(StaticPam.ecc_table_eccdyn_monitorid).get_NativeValue().toString();
-			map.put(monitorid, category);
+			map.put(monitorid, dyn);
 		}
 		
 		Collection col=EccApiUtil.getBussCollection(parm, parentid, StaticPam.ecc_table_monitor);
@@ -118,20 +131,34 @@ public class EccInterface {
 			BusinessObject bo=(BusinessObject) ite.next();
 			String id=bo.get_RecId();
 			String machineid=bo.GetField(StaticPam.ecc_table_monitor_machine).get_NativeValue().toString();
+			BusinessObject dyn=map.get(id);
+			String status="nodata";
+			String des="no log";
+			if(dyn!=null){
+				des=dyn.GetField("monitorDesc").get_NativeValue().toString();
+				status=dyn.GetField(StaticPam.ecc_table_eccdyn_category).get_NativeValue().toString();
+			}
 			if(!flag){
 				flag=per.contains(id);
 			}
 			if(!flag)
 				continue;
-			if(type.equals("Group")&&machineid.length()==32)
+			if(type.equals("Group")&&machineid.length()==32){
+				if(machinemap.get(machineid)==null)
+					machinemap.put(machineid, new ArrayList());
+					machinemap.get(machineid).add(status);
 				continue;
+			}
 			MonitorModle monitor=new MonitorModle();
 			monitor.setGroupid(bo.GetField(StaticPam.ecc_table_monitor_group).get_NativeValue().toString());
 			monitor.setMachineid(machineid);
 			monitor.setMonitorid(id);
 			monitor.setMonitortitle(bo.GetField(StaticPam.ecc_table_monitor_title).get_NativeValue().toString());
+			
+			
+			monitor.setDes(des);
 			monitor.setMonitortype(bo.get_Alias());
-			monitor.setStatus(map.get(id)==null?map.get(id):"nodata");
+			monitor.setStatus(status);
 			monitors.add(monitor);
 		}
 		return monitors;
@@ -168,7 +195,20 @@ public class EccInterface {
 			machinemodle.setMachineid(id);
 			machinemodle.setMachineip(bo.GetField(StaticPam.ecc_table_machine_ip).get_NativeValue().toString());
 			machinemodle.setMachinetitle(bo.GetField(StaticPam.ecc_table_machine_title).get_NativeValue().toString());
-			machinemodle.setStatus("");
+			List list=machinemap.get(id);
+			if(list==null){
+				machinemodle.setStatus("nodate");
+			}else if(list.contains("error")){
+				machinemodle.setStatus("error");
+			}else if(list.contains("warning")){
+				machinemodle.setStatus("warning");
+			}else if(list.contains("disable")){
+				machinemodle.setStatus("disable");
+			}else if(list.contains("nodata")){
+				machinemodle.setStatus("nodata");
+			}else{
+				machinemodle.setStatus("good");
+			}
 			machines.add(machinemodle);
 		}
 		return machines;

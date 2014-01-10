@@ -39,8 +39,8 @@ public class GetSubGroup extends EccServer{
 		if( UserInfor.users.get(map.get(StaticPam.username))!=null ){//&& UserInfor.users.get(user).equals(password)){
 			SiteViewEcc siteviewecc=new SiteViewEcc();
 			siteviewecc.setGroups(EccInterface.getGroup(user,groupid));
-			siteviewecc.setMachines(EccInterface.getMachine(user, groupid));
 			siteviewecc.setMonitors(EccInterface.getMonitor(user, groupid, map.get(StaticPam.type)));
+			siteviewecc.setMachines(EccInterface.getMachine(user, groupid));
 			return _key_+StaticPam._good+JSONObject.fromObject(siteviewecc).toString();
 		}
 		return _key_+StaticPam._error+StaticPam.error_nologin;

@@ -72,6 +72,19 @@ public class OmApi {
 		return formatIncident(col);
 	}
 	
+	public static List<Incident> getIncidentforTwo() throws SiteviewException{
+		Map<String,String> map=new HashMap<String,String>();
+		SimpleDateFormat simp=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal=Calendar.getInstance();
+		map.put("endTime", simp.format(cal.getTime()));
+		cal.add(Calendar.DAY_OF_MONTH, -1);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		map.put("startTime",simp.format(cal.getTime()));
+		map.put("RecId", "");
+		Collection<BusinessObject> col=OmApiUtil.getLog2(map,"incident");
+		return formatIncident(col);
+	}
+	
 	public static List<Incident> formatIncident(Collection<BusinessObject> col) throws SiteviewException{
 		List<Incident> incs=new ArrayList<Incident>();
 		Iterator<BusinessObject>   ite=col.iterator();

@@ -26,8 +26,8 @@ public class MyMessageListener implements PacketListener{
 	
 	public void processPacket(Packet arg0) {
 		final Message message=(Message) arg0;
-		new Thread() {
-			public void run() {
+//		new Thread() {
+//			public void run() {
 				Message m=new Message();
 				try{
 					String packetId=message.getPacketID();
@@ -54,8 +54,8 @@ public class MyMessageListener implements PacketListener{
 					System.out.println("send:--"+m.getPacketID()+"---"+m.getBody());
 					connection.sendPacket(m);
 				}
-			}
-		}.start();
+//			}
+//		}.start();
 	}
 	
 	public static String getReturnStr(String filePath, String parm) {

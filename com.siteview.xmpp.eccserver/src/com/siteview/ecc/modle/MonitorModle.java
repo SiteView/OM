@@ -16,6 +16,7 @@ public class MonitorModle {
 	private String machineid;
 	private String groupid;
 	private String status;
+	private String des;
 	public String getMonitorid() {
 		return monitorid;
 	}
@@ -51,5 +52,11 @@ public class MonitorModle {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getDes() {
+		return des;
+	}
+	public void setDes(String des) {
+		this.des = des;
 	}
 }

@@ -1,8 +1,5 @@
 package com.siteview.xmpp.util;
 
-import java.util.Date;
-
-import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.SSLXMPPConnection;
@@ -15,12 +12,11 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
 
-import Siteview.Convert;
-
 public class XMPPActivator extends Thread{
 	static String id = "xmpp.siteview.com";
 	static int port = 5223;
-//	static String userName = "redirector";
+//	static String userName = "eccdemo";
+//	static String userPwd = "siteview";
 	public static String userName = "test2";
 	static String userPwd = "zhonglihua";
 	public static XMPPConnection connection;

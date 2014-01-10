@@ -1,5 +1,6 @@
 package com.siteview.xmpp.om.modle;
 
+
 public class UserInfo {
 	private String username;
 	private String loginId;
@@ -22,5 +23,4 @@ public class UserInfo {
 	public void setTeam(String team) {
 		this.team = team;
 	}
-	
 }

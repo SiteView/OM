@@ -44,6 +44,7 @@ public class OmLogin extends OmServer{
 			return _key_+StaticPam._good+JSONObject.fromObject(om).toString();//+EccInterface.get(user);
 		}else{
 			om.setUsers(StaticPam.users);
+			om.setIncs(OmApi.getIncidentforTwo());
 			return _key_+StaticPam._good+JSONObject.fromObject(om).toString();//+EccInterface.get(user);
 		}
 	}
