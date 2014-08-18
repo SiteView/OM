@@ -14,6 +14,7 @@ public class GroupModle {
 	private String groupname;
 	private String groupdes;
 	private String status;
+	private String lastmoddatetime;
 	public String getGroupparent() {
 		return groupparent;
 	}
@@ -43,5 +44,11 @@ public class GroupModle {
 	}
 	public void setGroupdes(String groupdes) {
 		this.groupdes = groupdes;
+	}
+	public String getLastmoddatetime() {
+		return lastmoddatetime;
+	}
+	public void setLastmoddatetime(String lastmoddatetime) {
+		this.lastmoddatetime = lastmoddatetime;
 	}
 }

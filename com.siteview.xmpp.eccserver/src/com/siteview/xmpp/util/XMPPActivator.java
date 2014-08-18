@@ -13,37 +13,42 @@ import org.jivesoftware.smack.packet.Presence.Type;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
 
 public class XMPPActivator extends Thread{
-	static String id = "xmpp.siteview.com";
-	static int port = 5223;
-//	static String userName = "redirector";
-	public static String userName = "eccdemo";
+	static String host = "xmpp1.bigit.com";
+	static String server = "xmpp.bigit.com";
+	static int port = 995;
+//	static String host = "xmpp.siteview.com";
+//	static String server = "xmpp.siteview.com";
+//	static int port = 5223;
+	static String userName = "mobilerouter";
+//	public static String userName = "eccdemo";
 	static String userPwd = "siteview";
 	public static XMPPConnection connection;
 	public static PacketFilter messagefilter;
 	public static PacketListener messageListener;
 	public RecFileTransferListener fileTransferListener;
 	public void run() {
-		final XMPPActivator xmppa=new XMPPActivator();
-		try {
-			xmppa.init();
-		} catch (XMPPException e) {
-			e.printStackTrace();
-		}
-//		XMPPActivator.setStatus(true, "Activati",connection);
+//		final XMPPActivator xmppa=new XMPPActivator();
+//		xmppa.init();
 	}
-	public void init() throws XMPPException {
-		XMPPConnection con = new SSLXMPPConnection(id, port);
-		con.login(userName, userPwd);
-		connection = con;
-		if(connection==null){
-			try {
-				this.wait(10000);
-				init();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
+	public void init(){
+		if(connection!=null&&connection.isConnected())
+			return;
+//		XMPPConnection con=null;
+		try {
+			connection = new SSLXMPPConnection(host, port,server);
+			connection.login(userName, userPwd);
+		} catch (XMPPException e1) {
+			e1.printStackTrace();
 		}
+//		connection = con;
+//		while(connection==null||!connection.isConnected()){
+//			try {
+//				this.sleep(10000);
+//				init();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		messageListener = new MyMessageListener(connection);
 		messagefilter=new PacketTypeFilter(Message.class);
 		fileTransferListener=new RecFileTransferListener();
@@ -53,24 +58,12 @@ public class XMPPActivator extends Thread{
 		connection.addConnectionListener(new ConnectionListener() {
 			public void connectionClosedOnError(Exception arg0) {
 				final XMPPActivator xmppa=new XMPPActivator();
-				try {
-//					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
-					xmppa.init();
-				} catch (XMPPException e) {
-					e.printStackTrace();
-				}
-//				XMPPActivator.setStatus(true, "Activati",connection);
+				xmppa.init();
 			}
 			
 			public void connectionClosed() {
-				final XMPPActivator xmppa=new XMPPActivator();
-				try {
-					xmppa.init();
-//					FileTool.setlogfile("RouterKeyFile/logfile",  Convert.ToDateString(new Date())+":"+"自动登录");
-				} catch (XMPPException e) {
-					e.printStackTrace();
-				}
-//				XMPPActivator.setStatus(true, "Activati",connection);
+//				final XMPPActivator xmppa=new XMPPActivator();
+//				xmppa.init();
 			}
 		});
 	}

@@ -17,6 +17,7 @@ public class MonitorModle {
 	private String groupid;
 	private String status;
 	private String des;
+	private String lastmoddatetime;
 	public String getMonitorid() {
 		return monitorid;
 	}
@@ -58,5 +59,11 @@ public class MonitorModle {
 	}
 	public void setDes(String des) {
 		this.des = des;
+	}
+	public String getLastmoddatetime() {
+		return lastmoddatetime;
+	}
+	public void setLastmoddatetime(String lastmoddatetime) {
+		this.lastmoddatetime = lastmoddatetime;
 	}
 }

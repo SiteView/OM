@@ -1,9 +1,12 @@
 package com.siteview.xmpp.eccserver;
 
+import java.util.Date;
+import java.util.Timer;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import com.siteview.xmpp.util.XMPPActivator;
+import com.siteview.xmpp.util.MyTimer;
 
 public class Activator implements BundleActivator {
 
@@ -20,8 +23,11 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		java.lang.Thread xmpp = new XMPPActivator();
-	    xmpp.start();
+//		java.lang.Thread xmpp = new XMPPActivator();
+//	    xmpp.start();
+		 Timer timer = new Timer();
+		 MyTimer myTime = new MyTimer();
+		 timer.schedule(myTime, new Date(), 60000L);
 	}
 
 	/*

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:core.siteviewbackgroundserver.apploader.ServerRunCommand?after=siteviewinstallservices">
+         <menu
+               icon="icon/logo16.png"
+               id="gatewayservermenu"
+               label="代理服务">
+            <command
+                  commandId="com.siteview.kernel.xmpp.command.GatewayStartCommand"
+                  icon="icon/run.png"
+                  label="开启服务"
+                  mode="FORCE_TEXT"
+                  style="pulldown">
+            </command>
+            <command
+                  commandId="com.siteview.kernel.xmpp.command.GatewayStopCommand"
+                  icon="icon/stop.gif"
+                  label="关闭服务"
+                  mode="FORCE_TEXT"
+                  style="pulldown">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="com.siteview.kernel.xmpp.command.GatewayStartCommand"
+            id="com.siteview.kernel.xmpp.command.GatewayStartCommand"
+            name="开启服务">
+      </command>
+      <command
+            defaultHandler="com.siteview.kernel.core.server.command.GatewayStopCommand"
+            id="com.siteview.kernel.xmpp.command.GatewayStopCommand"
+            name="关闭服务">
+      </command>
+   </extension>
+
+</plugin>

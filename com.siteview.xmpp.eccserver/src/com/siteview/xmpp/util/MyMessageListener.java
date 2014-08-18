@@ -18,7 +18,7 @@ import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
 import com.siteview.ecc.server.EccServer;
 public class MyMessageListener implements PacketListener{
 	public static Properties prop = null;
-	public static String form=XMPPActivator.userName+"@xmpp.siteview.com/MiddServer";
+	public static String form=XMPPActivator.userName+"@xmpp.bigit.com";
 	public static XMPPConnection connection;
 	public MyMessageListener(XMPPConnection connection) {
 		this.connection=connection;
@@ -32,14 +32,14 @@ public class MyMessageListener implements PacketListener{
 				try{
 					String packetId=message.getPacketID();
 					String s=message.getBody();
-					System.out.println("from:--"+message.getPacketID()+"---"+message.getBody());
+//					System.out.println("from:--"+message.getPacketID()+"---"+message.getBody());
 					if(s==null)return;
-					m.setFrom(form);
 					m.setPacketID(packetId);
 					m.setTo(message.getFrom());
 					m.setType(Message.Type.CHAT);
 					if(!s.contains(":")){
 						m.setBody("error:format");
+						connection.sendPacket(m);
 					}else{
 						String key=s.substring(0,s.indexOf(":")).trim();
 						String value=FileTool.getReturnStr(FileTool.getRoot()+"src/key_value.properties", key);
@@ -74,7 +74,7 @@ public class MyMessageListener implements PacketListener{
 	public static String getRoot(){
 		 String path=null;
 		  try {
-		    path = FileLocator.toFileURL(Platform.getBundle("com.siteview.awsControl").getEntry("")).getPath();
+		    path = FileLocator.toFileURL(Platform.getBundle("com.siteview.xmpp.eccserver").getEntry("")).getPath();
 		    path = path.substring(path.indexOf("/") + 1, path.length());
 		  } catch (Exception e) {
 		    e.printStackTrace();

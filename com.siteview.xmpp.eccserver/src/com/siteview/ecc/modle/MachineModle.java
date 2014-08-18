@@ -14,6 +14,7 @@ public class MachineModle {
 	private String machinetitle;
 	private String groupid;
 	private String status;
+	private String lastmoddatetime;
 	public String getMachineid() {
 		return machineid;
 	}
@@ -43,6 +44,12 @@ public class MachineModle {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getLastmoddatetime() {
+		return lastmoddatetime;
+	}
+	public void setLastmoddatetime(String lastmoddatetime) {
+		this.lastmoddatetime = lastmoddatetime;
 	}
 	
 }

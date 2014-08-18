@@ -51,6 +51,7 @@ public class EccApiUtil {
 	    Element xml = null;
 	    xml = query.get_CriteriaBuilder().FieldAndValueExpression(key, 
 	      Operators.Equals, value);
+	    query.AddOrderByDesc("CreatedDateTime");
 	    query.set_BusObSearchCriteria(xml);
 	    Collection iCollenction = getApi()
 	      .get_BusObService().get_SimpleQueryResolver()

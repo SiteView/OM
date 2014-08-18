@@ -37,6 +37,9 @@ public class StaticPam {
 	public static String ecc_table_Per_UserId="UserId";//权限表格用户id
 	public static String ecc_table_Per_PerType="PermissionsType";//权限类型(Group/Machine/Monitor)
 	
+	public static String status="Status";
+	public static String lastmoddatetime="LastModDatetime";
+	
 	public static String ecc_table_group="EccGroup";//组
 	public static String ecc_table_group_par="ParentGroupId";//父组id
 	public static String ecc_table_group_groupname="GroupName";//组名
@@ -47,7 +50,7 @@ public class StaticPam {
 	public static String ecc_table_eccdyn_groupid="groupid";//临时表中组id
 	public static String ecc_table_eccdyn_monitorid="monitorid";//临时表中监测器id
 	
-	public static String ecc_table_machine="RemoteMachine";//设备
+	public static String ecc_table_machine="Equipment";//设备
 	public static String ecc_table_machine_ip="ServerAddress";//设备ip
 	public static String ecc_table_machine_group="Groups";//设备的组id
 	public static String ecc_table_machine_title="Title";//设备的标题
@@ -57,6 +60,7 @@ public class StaticPam {
 	public static String ecc_table_monitor_group="Groups";//监测器组id
 	public static String ecc_table_monitor_machine="Machine";//监测器的设备id
 	public static String ecc_table_monitor_title="Title";//监测器标题；
+	public static String ecc_table_monitor_message="message";//监测器标题；
 	
 	public static String ecc_table_monitorlog="MonitorLog";//监测器日志
 	public static String ecc_table_monitorlog_monitorid="MonitorId";//监测器日志的监测器id

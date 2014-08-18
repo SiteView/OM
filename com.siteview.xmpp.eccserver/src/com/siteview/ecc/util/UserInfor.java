@@ -30,7 +30,7 @@ public class UserInfor {
 			String s=dt.get_Rows().get_Item(i).get_Item(0).toString();
 			Siteview.User u= EccApiUtil.getApi()
 					.get_AuthenticationService().GetUser("User", s);
-			if(u.get_SecurityGroupName().equals("监测管理员")){
+			if(u.get_SecurityGroupName().equals("监测管理员")||u.get_SecurityGroupName().equals("Administrators")){
 	 			users.put(u.get_LoginId(), u.get_InternalUserInfo().get_Password());
 	 			superuser.add(u.get_LoginId());
 			}else if(u.get_SecurityGroupName().equals("监测经理")){
